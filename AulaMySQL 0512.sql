@@ -69,7 +69,9 @@ select * from curso where codProfessor in(1,2,3,5);
 /*Inner Join*/
 select nomeCurso, nomeProfessor from curso
 inner join professor
-on Curso.codProfessor = professor.codProfessor;
+on Curso.codProfessor = professor.codProfessor
+where nomeCurso = 'Meio Ambiente' or 'Moda'
+order by nomeProfessor asc;
 
 alter table aluno add codCurso int;
 ALTER TABLE Aluno ADD FOREIGN KEY (codCurso) REFERENCES curso(codCurso);
@@ -77,3 +79,23 @@ ALTER TABLE Aluno ADD FOREIGN KEY (codCurso) REFERENCES curso(codCurso);
 select nomeAluno, nomeCurso from aluno
 inner join curso
 on Curso.codcurso = aluno.codcurso;
+
+alter table aluno add dataNasc date;
+update aluno set dataNasc = ('1999/05/20') where Matricula = 1;
+update aluno set dataNasc = ('1998/06/21') where Matricula = 2;
+update aluno set dataNasc = ('1997/07/22') where Matricula = 3;
+update aluno set dataNasc = ('1996/04/23') where Matricula = 4;
+update aluno set dataNasc = ('2001/05/02') where Matricula = 5;
+update aluno set dataNasc = ('2002/01/08') where Matricula = 6;
+update aluno set dataNasc = ('2000/02/16') where Matricula = 7;
+
+select nomeAluno, emailAluno
+from Aluno
+where not dataNasc < '2000-01-01';
+
+select nomeCurso, cargaHoraria, codProfessor
+from curso
+where cargaHoraria between 1200 and 1400
+and codProfessor !=1;
+
+select nomeAluno, matricula from aluno where matricula order by matricula desc;
